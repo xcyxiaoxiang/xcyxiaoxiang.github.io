@@ -1,3 +1,4 @@
+http://example.com/article/19cd5c15.html
 http://example.com/Gallery/university/index.html
 http://example.com/Gallery/Sunset/index.html
 http://example.com/Gallery/index.html
@@ -7,5 +8,8 @@ http://example.com/about/index.html
 http://example.com/article/824ac3d0.html
 http://example.com/
 http://example.com/tags/ajax/
+http://example.com/tags/linux/
 http://example.com/categories/Java/
 http://example.com/categories/Java/Ajax/
+http://example.com/categories/Linux/
+http://example.com/categories/Linux/%E6%90%AD%E5%BB%BA/

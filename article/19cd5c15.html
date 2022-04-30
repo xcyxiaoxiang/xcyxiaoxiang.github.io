@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux|记一次裸机安装Ubuntu的过程.md | Xcy.小相</title><meta name="keywords" content="linux,内网穿透,磁盘分区"><meta name="author" content="Xcy.小相"><meta name="copyright" content="Xcy.小相"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="近期实验室进了一个的服务器主机，根据导师要求需要对机器装机、搭建环境等等进行一列的操作，这里便记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux|记一次裸机安装Ubuntu的过程.md">
+<meta property="og:url" content="http://example.com/article/19cd5c15.html">
+<meta property="og:site_name" content="Xcy.小相">
+<meta property="og:description" content="近期实验室进了一个的服务器主机，根据导师要求需要对机器装机、搭建环境等等进行一列的操作，这里便记录一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png">
+<meta property="article:published_time" content="2022-04-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-30T13:43:10.284Z">
+<meta property="article:author" content="Xcy.小相">
+<meta property="article:tag" content="-linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://example.com/article/19cd5c15"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":800,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: Xcy.小相","link":"链接: ","source":"来源: Xcy.小相","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux|记一次裸机安装Ubuntu的过程.md',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-30 21:43:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Xcy.小相" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光机</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于小相</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xcy.小相</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光机</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于小相</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux|记一次裸机安装Ubuntu的过程.md</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T16:00:00.000Z" title="发表于 2022-04-29 00:00:00">2022-04-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-30T13:43:10.284Z" title="更新于 2022-04-30 21:43:10">2022-04-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/%E6%90%AD%E5%BB%BA/">搭建</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux|记一次裸机安装Ubuntu的过程.md"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>近期实验室进了一个的服务器主机（以下简称<code>机器</code>），机器的主体配置如下：</p>
+<ol>
+<li>CPU： i7-11700f</li>
+<li>主板: 华硕z590-p</li>
+<li>内存：海盗船32G×2</li>
+<li>固态：西数1T</li>
+<li>机械：西数4T</li>
+<li>GPU：3080Ti</li>
+</ol>
+<p>要求：</p>
+<ol>
+<li>分配<code>500G固态</code>为机器安装<code>Ubutu18.04LTS</code>系统，剩余的作为存储用途。</li>
+<li>同时将4T机械进行分区。</li>
+<li>为系统装配anconda环境</li>
+<li>搭建tensorflow、pytorch环境（要求都装配在conda虚拟环境中）。</li>
+</ol>
+</blockquote>
+<h1 id="1-系统安装"><a href="#1-系统安装" class="headerlink" title="1. 系统安装"></a>1. 系统安装</h1><h2 id="1-1-制作启动盘"><a href="#1-1-制作启动盘" class="headerlink" title="1.1 制作启动盘"></a>1.1 制作启动盘</h2><p>这里制作启动盘的工具是<code>UltraISO</code>。官网地址：<a target="_blank" rel="noopener" href="https://www.ultraiso.com/%E3%80%82UtlraISO">https://www.ultraiso.com/。UtlraISO</a> 是款收费软件，不过下载安装好以后给我们试用的机会，所以如果你是装机的话足够了。安装好以后打开软件，点击 <code>继续使用</code>：</p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/aHR0cHM6Ly9saXV3eW5uLmdpdGh1Yi5pby9pbWFnZXMvMjAxOTA3MTIvMS0xLnBuZw" alt="1-1"></p>
+<p>点击 <code>文件 -&gt; 打开</code>，选择下载好的<code> ISO</code> 镜像文件，然后打开：</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/20190712164759864.png" alt="1-3" style="zoom:80%;" />
+
+<p>点击 <code>启动-</code>&gt; <code>写入硬盘映像</code>：</p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/aHR0cHM6Ly9saXV3eW5uLmdpdGh1Yi5pby9pbWFnZXMvMjAxOTA3MTIvMS00LnBuZw" alt="1-4"></p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/aHR0cHM6Ly9saXV3eW5uLmdpdGh1Yi5pby9pbWFnZXMvMjAxOTA3MTIvMS01LnBuZw" alt="1-5"></p>
+<p>选项都确定没问题以后可以点击 <code>写入</code> 按钮，此时会提示你会格式化U盘，选择 <strong>yes</strong>，然后静静的等待刻录完成即可。</p>
+<h2 id="1-2-配置bios"><a href="#1-2-配置bios" class="headerlink" title="1.2 配置bios"></a>1.2 配置bios</h2><h3 id="1-2-1-bois简介"><a href="#1-2-1-bois简介" class="headerlink" title="1.2.1 bois简介"></a>1.2.1 bois简介</h3><p><strong>BIOS</strong>(Basic Input Output System),直译过来后中文名称就是”<strong>基本输入输出系统</strong>“。BIOS是个人电脑启动时加载的<strong>第一个软件</strong>。</p>
+<p>其实，它是一组固化到计算机内<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E6%9D%BF">主板</a>上一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ROM">ROM</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%8A%AF%E7%89%87">芯片</a>上的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F">程序</a>，它保存着计算机最重要的基本输入输出的程序、开机后自检程序和系统自启动程序，它可从<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CMOS/428167">CMOS</a>中<strong>读写系统设置</strong>的具体信息。 其主要功能是<strong>为计算机提供最底层的、最直接的硬件设置和控制</strong>。此外，BIOS还向作业系统提供一些<strong>系统参数</strong>。</p>
+<p>系统硬件的变化是由BIOS隐藏，程序使用BIOS功能而不是直接控制硬件。现代作业系统会忽略BIOS提供的抽象层并直接控制硬件组件。</p>
+<blockquote>
+<p>以上内容引至**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/bios/91424">百度百科</a>**。</p>
+</blockquote>
+<h3 id="1-2-2-如何进入BIOS"><a href="#1-2-2-如何进入BIOS" class="headerlink" title="1.2.2 如何进入BIOS"></a>1.2.2 如何进入BIOS</h3><p>进入bios的方式会因主板的不而不同，不同的主板厂商设定的方式不同的。一般在主机刚刚开机出现厂商<code>logo</code>的时候，通常会在下面有一行小字说明按什么键进入BIOS，这时候按相应的按键就行了。一般为<code>f2</code>、<code>del</code>、<code>f12</code>这些键。也可以去网络上查询当前主板对应的按键。不同主板的bios界面不大相同，但是主体功能是一样的。</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/image-20220426090444045.png" alt="image-20220426090444045" style="zoom:80%;" />
+
+
+
+<h3 id="1-2-3-关闭安全引导（secure-boot）"><a href="#1-2-3-关闭安全引导（secure-boot）" class="headerlink" title="1.2.3 关闭安全引导（secure boot）"></a>1.2.3 关闭安全引导（secure boot）</h3><blockquote>
+<p>这一步骤是重中之中，<strong>是必须的操作</strong>！！！操作方式<strong>基本如下</strong>，不同的主板关闭安全引导的方式可能会略有不同。</p>
+</blockquote>
+<p><strong>Security Boot</strong>（安全引导），如果只使用Windows操作系统不打算使用Linux的话，这项默认开启就可以了。如果有要安装Linux需求的话，最好还是关闭（<strong>disabled</strong>）这个选项，否则无法引导。后续将会导致各种各样的问题，如<strong>网络驱动无法安装、系统内核无法修改、驱动丢失</strong>等等。</p>
+<p><strong>Boot Mode</strong>（启动模式），有<code>UEFI</code>和<code>BIOS</code>两种。如果需要扩展到XP等就操作系统的话，需要将<code>SATA模式</code>设置为<strong>Legacy</strong>，并在这里将启动模式设置为BIOS。而如果要安装Win8、Win10、Linux等比较新的操作系统的话，最好使用<strong>UEFI</strong>，可以整体提高系统引导速度和安全性。</p>
+<blockquote>
+<p>SATA Mode：SATA模式，有Legacy和AHCI两种。在安装XP系统的时候，需要Legacy模式才能安装。而现在安装最新的Win10等系统的时候，改成AHCI模式更好并能提高硬盘的性能。</p>
+</blockquote>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220426091340822.png" alt="image-20220426091340822"></p>
+<h2 id="1-3-使用启动盘安装系统"><a href="#1-3-使用启动盘安装系统" class="headerlink" title="1.3 使用启动盘安装系统"></a>1.3 使用启动盘安装系统</h2><blockquote>
+<p>这里是以<code>Ubuntu18.04LTS</code>作为将要安装的系统。</p>
+</blockquote>
+<p>将装好的启动盘插入机器，重启，并在出现logo界面时根据logo下的提示进入<code>开机引导</code>。选择选择U盘，我这里是金士顿的，如图。然后回车，便进入了ubuntu安装界面。</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/image-20220426092752779.png" alt="image-20220426092752779" style="zoom:80%;" />
+
+
+
+<p>选择第二项安装ubuntu，即<code>install ubuntu</code></p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220426092836484.png" alt="image-20220426092836484"></p>
+<p>接下来就是选择语言的部分，可以选择中文或英文（这里以中文为例）&#x3D;&#x3D;&gt; 安装ubuntu。</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/image-20220426093150039.png" alt="image-20220426093150039" style="zoom: 67%;" />
+
+
+
+<p>下一步的键盘布局（默认即可），再接下来是选择连接网络，这里先不连接。</p>
+<p>接下来的这一步选择正常安装即可（有的版本没有正常安装这一选项，那就全都不选），因为会消耗大量的时间！建议在安装系统后手动进行更新。</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/image-20220427164216161.png" alt="image-20220427164216161" style="zoom:50%;" />
+
+<p> 选择安装类型，强烈建议选择“<strong>其他选项</strong>”，通过这个选项我们可以自定义磁盘分区，可操作行比较强。</p>
+<img src="/../../gitBiji/Linux/.images/记一次裸机安装Ubuntu的过程/image-20220427163908943.png" alt="image-20220427163908943" style="zoom:67%;" />
+
+<p><strong>接下来是<code>分区</code>，也是装机部分最重要，最难的地方！</strong>以下部分的图片是我用网图，当时装机时忘记拍照了（原理是相同的）。</p>
+<p>我们使用提前处理好的1T固态，由于是裸机状态，我们这里显示应该就只有一个<strong>空闲</strong>设备（<code>dev/sd*</code>），大小在1T左右。点击这个设备，选择新建分区表，按照我下面的方式进行分区：</p>
+<blockquote>
+<p>这里我们就使用”<strong>懒人分区法</strong>“，优点是快速简单，缺点是由于没有进行精细的分区，若该磁盘中的某个磁道损坏，系统的修复难度会增加。再进行正式分区之前，我们先来了解几个概念，以便后续操作：</p>
+<ol>
+<li><code>swap</code>：也叫交换分区、交换空间。作用是在系统的物理<strong>内存不够用</strong>的时候，把<strong>硬盘内存</strong>中的一部分空间释放出来，以供当前运行的程序使用。在window中称之为<code>虚拟内存</code>。</li>
+<li><code>efi</code>：</li>
+<li><code>/</code>：</li>
+</ol>
+</blockquote>
+<ol>
+<li><p>配置交换分区</p>
+<p>随着内存技术的发展，对于大多数电脑来说，交换分区存在的一一并不大，就拿笔者个人的双系统（运行内存为16G）来说，当时为linux 划定了8G的交换分区，然后就没然后了……，因为笔者的16G内存基本满足日常需要，因此这个分区一直没有用到。</p>
+<p>网络上有许多”swap为内存的2倍“也不过是一种<strong>以讹传讹</strong>的说法。如果交换分区的使用都超过4GB以上了，可想而知服务器的性能应该差很多了。</p>
+<p>但是对于一些大型主机来说，运行数据较为庞大，还是为其划定交换分区好一些。笔者查阅了许多资料，大体给定了以下分区<strong>建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>物理内存大小</th>
+<th>建议swap大小</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;4G</code></td>
+<td>swap &#x3D; 物理内存大小 x 2</td>
+<td>内存较小，运行程序较多时，物理内存出现容量不足的可能性大些。</td>
+</tr>
+<tr>
+<td><code>4-8G</code></td>
+<td>swap &#x3D; 物理内存大小</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code>8-64G</code></td>
+<td>swap &#x3D; 8G</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code>&gt; 64G</code></td>
+<td>swap &#x3D; 16G</td>
+<td>64G以上的交换空间，很少出现物理内存不足的情况了。</td>
+</tr>
+</tbody></table>
+<p>选择<code>空闲</code>的磁盘，点击<code>新建分区表</code>，然后就会弹窗，首先需要将<code>用于</code>设置为<code>交换空间</code>然后根据根据上方的建议设置交换空间即可。</p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220427173802396.png" alt="image-20220427173802396"></p>
+</li>
+<li><p>这里我们使用”<strong>懒人分区法</strong>“，即直接给<code>/</code>划分空间，不再手动给其子目录分配空间。即将空间交给最大的<code>根目录</code>，让系统自动的管理各个子目录的空间大小。该区域的最小空间为<code>20G</code>。根据需求，作者这里给<code>/</code>分配了500G的空间。（以下网图，选择<code>主分区、空间起始位置、EXT4、/</code>）：<img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220429152240269.png" alt="image-20220429152240269"></p>
+</li>
+<li><p>按照往常的装机过程，仅划分这两个区域即可，进行下一步的装机。但是作者这里在完成这一步后，点击安装时却出现了警告，如下图所示。后来发现是因为系统为裸机，没有efi这个分区（EFI是GPT硬盘分区模式中的系统启动分区），从而会报错。</p>
+<p>解决办法是为系统划分一个大约<code>最大1G</code>的efi分区，操作步骤同上，将<code>用于</code>这个地方改为<code>efi分区</code>即可。</p>
+<p>​	<img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220429153316915.png" alt="image-20220429153316915"></p>
+<p>最后完成的效果如下（网图）： </p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220427165129607.png" alt="image-20220427165129607"></p>
+</li>
+<li><p>之后就是输入一下个人信息和密码之类的简单操作了，这里不再赘述了。完成这些后等待安装即可。</p>
+</li>
+<li><p>安装完成后需要重启机器，不出意外的话，你就可以正常进入系统了。</p>
+</li>
+</ol>
+<h2 id="1-4-安装网卡驱动"><a href="#1-4-安装网卡驱动" class="headerlink" title="1.4 安装网卡驱动"></a>1.4 安装网卡驱动</h2><p>不出意外的话，作者这里出现了意外…… 当我重启机器，兴高采烈的进入系统后发现竟然没有网络！甚至连网络图标都没有！（后来才想起来是因为没有关闭<code>安全启动</code>导致的，唉～）</p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220429155332280.png" alt="image-20220429155332280"></p>
+<p>第一时间想到了是否机器的网卡损坏了？于是在终端执行一下命令查看网卡是否能够检测到：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lspci | grep -i net</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/2039513-20211109205358031-404031072.png" alt="img"></p>
+<p> 到这里，可以发现系统能够检测到网卡（网卡型号：<code>Realtek PCIe FE Family Controller</code>），说明硬件没有问题。那么是否是网卡驱动没有安装？于是赶紧打开终端输入了以下命令，果然，是没有安装网卡驱动导致的（正常情况下应该有多个ip）。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/2039513-20211109204121009-1270281083.png" alt="img"></p>
+<p>于是，作者根据上一步检测到的网卡型号（<code>Realtek PCIe FE Family Controller</code>），利用另外一台机器到其对应的官网（Realtek ）上下了网卡驱动，要注意驱动版本以及系统版本。</p>
+<p><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/2039513-20211109210038614-248006278.png" alt="img"></p>
+<p>下载驱动后，将驱动文件导入到U盘内，并copy到我们的机器上。采用<code>dkms</code>工具安装驱动，但是在这之前，我们需要安装一些依赖项，否则，dkms无法安装。这些依赖在启动盘的<code>/pool/main/</code>下的都存在，因此我们通过启动盘安装这些依赖即可，不必在额外去下载。安装依赖时按照我下面的顺序来即可：</p>
+<blockquote>
+<ol>
+<li>进入<code>/g/gcc-8/</code>目录</li>
+<li>进入<code>/l/linux/</code>目录</li>
+<li>进入<code>/g/glibc/</code>目录</li>
+<li>进入<code>/g/gcc-default/</code>目录</li>
+<li>进入<code>/g/gcc-7/</code>目录</li>
+<li>进入<code>/m/make-dfsg/</code>目录</li>
+<li>进入<code>/d/dpkg-dev/</code>目录</li>
+<li>进入<code>/d/dkms</code>目录（这一步为安装dkms，因此放到最后执行）</li>
+</ol>
+</blockquote>
+<p>进入以上目录后，执行以下命令进行安装。若出现报错，便根据报错提示的缺失包的首字符到对应的包内安装即可：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dpkg -i ./*.deb</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们完成了所有依赖，包括dkms的安装工作。接下来，我们对网卡驱动下手，先将其解压到指定目录<code>/usr/src</code>下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo tar xvf r8125-9.003.02.tar.bz2 -C /usr/src</span><br></pre></td></tr></table></figure>
+
+<p>在解压后的文件夹中添加一个<strong>dkms的配置文件</strong>：<code>dkms.conf</code>（文件所在目录：&#x2F;usr&#x2F;src&#x2F;8125-9.006.04&#x2F;dkms.conf）（注意这个目录的名字、下面的配置文件内容、编译驱动时的命令中涉及到驱动版本的地方，<strong>要根据自己的驱动版本进行修改</strong> &lt;我这里是8125-9.006.04&gt; ）</p>
+<p>配置文件的内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PACKAGE_NAME=Realtek_r8125</span><br><span class="line">PACKAGE_VERSION=9.006.04</span><br><span class="line"></span><br><span class="line">DEST_MODULE_LOCATION=/updates/dkms</span><br><span class="line">BUILT_MODULE_NAME=r8125</span><br><span class="line">BUILT_MODULE_LOCATION=src/</span><br><span class="line"></span><br><span class="line">MAKE=<span class="string">&quot;&#x27;make&#x27; -C src/ all&quot;</span></span><br><span class="line">CLEAN=<span class="string">&quot;&#x27;make&#x27; -C src/ clean&quot;</span></span><br><span class="line">AUTOINSTALL=<span class="string">&quot;yes&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来使用dkms工具编译驱动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dkms add -m r8125 -v 9.006.04</span><br><span class="line">sudo dkms build -m r8125 -v 9.006.04</span><br><span class="line">sudo dkms install -m r8125 -v 9.006.04</span><br><span class="line">sudo depmod -a</span><br><span class="line">sudo modprobe r8125</span><br></pre></td></tr></table></figure>
+
+<p>完成以上命令，网卡驱动就安装成功了，如果顺利的话，屏幕右上角也出现了网络的标志。再次输入命令<code>ip a</code>，可以看到出现了新的ip地址。</p>
+<blockquote>
+<p>以上为正常安装所需要执行的过程，但是作者在执行到<code>sudo modprobe r8125</code>时，出现了权限不允许，但是作者已经是使用<code>root（sudo）</code>身份执行的命令啊？于是作者根据报错的关键词去网络上查找。大多数的回答都是**<code>linux内核</code>不允许修改<strong>！原来如此，这里的权限不允许，所指的是内核权限！那么管理内核权限的位置之一就是<code>安全引导</code>这一部分了，于是作者抓紧时间重启机器，进入bios，</strong>将安全引导关闭**！再次启动机器，发现开机就直接有网络标识了！所以，装机时一定要仔细，不要像作者一样粗心大意！</p>
+</blockquote>
+<h2 id="1-5-更换国内源"><a href="#1-5-更换国内源" class="headerlink" title="1.5 更换国内源"></a>1.5 更换国内源</h2><p>网络问题解决了，接下了第一间要做的事情就是将apt源更换为国内的源了（默认为国外的，网速太慢）。</p>
+<h3 id="1-备份"><a href="#1-备份" class="headerlink" title="1. 备份"></a>1. 备份</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-修改"><a href="#2-修改" class="headerlink" title="2.修改"></a>2.修改</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>将source.list文件内容替换成下面的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># deb cdrom:[Ubuntu 20.04.2.0 LTS _Focal Fossa_ - Release amd64 (20210209.1)]/ focal main restricted</span><br><span class="line"></span><br><span class="line"># See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to</span><br><span class="line"># newer versions of the distribution.</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal main restricted</span><br><span class="line"></span><br><span class="line">## Major bug fix updates produced after the final release of the</span><br><span class="line">## distribution.</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal-updates main restricted</span><br><span class="line"></span><br><span class="line">## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span><br><span class="line">## team. Also, please note that software in universe WILL NOT receive any</span><br><span class="line">## review or updates from the Ubuntu security team.</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal universe</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal universe</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal-updates universe</span><br><span class="line"></span><br><span class="line">## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span><br><span class="line">## team, and may not be under a free licence. Please satisfy yourself as to</span><br><span class="line">## your rights to use the software. Also, please note that software in</span><br><span class="line">## multiverse WILL NOT receive any review or updates from the Ubuntu</span><br><span class="line">## security team.</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal multiverse</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal multiverse</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal-updates multiverse</span><br><span class="line"></span><br><span class="line">## N.B. software from this repository may not have been tested as</span><br><span class="line">## extensively as that contained in the main release, although it includes</span><br><span class="line">## newer versions of some applications which may provide useful features.</span><br><span class="line">## Also, please note that software in backports WILL NOT receive any review</span><br><span class="line">## or updates from the Ubuntu security team.</span><br><span class="line"># deb-src http://cn.archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">## Uncomment the following two lines to add software from Canonical&#x27;s</span><br><span class="line">## &#x27;partner&#x27; repository.</span><br><span class="line">## This software is not part of Ubuntu, but is offered by Canonical and the</span><br><span class="line">## respective vendors as a service to Ubuntu users.</span><br><span class="line"># deb http://archive.canonical.com/ubuntu focal partner</span><br><span class="line"># deb-src http://archive.canonical.com/ubuntu focal partner</span><br><span class="line"></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted</span><br><span class="line"># deb-src http://security.ubuntu.com/ubuntu focal-security main restricted</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security universe</span><br><span class="line"># deb-src http://security.ubuntu.com/ubuntu focal-security universe</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security multiverse</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-更新"><a href="#3-更新" class="headerlink" title="3. 更新"></a>3. 更新</h3><p>更新软件源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+<p>更新软件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>小插曲：</strong></p>
+<p>在执行完软件更新后，作者想通过网络浏览器登录邮箱下载一些配置文件，却发现机器又变成了无网络状态。执行<code>ip a</code>命令，发现又变成了只有一个本地地址的状态。怀疑是由于软件更新，导致网络驱动的一些版本依赖发生问题，因此，又执行命令将网络驱动卸载，并重新挂载，<strong>至此，网络问题才完全解决。</strong></p>
+<p>卸载网络驱动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dkms remove r8125/9.006.04 --all</span><br></pre></td></tr></table></figure>
+
+<p>重新安装网卡驱动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dkms add -m r8125 -v 9.006.04</span><br><span class="line">sudo dkms build -m r8125 -v 9.006.04</span><br><span class="line">sudo dkms install -m r8125 -v 9.006.04</span><br><span class="line">sudo depmod -a</span><br><span class="line">sudo modprobe r8125</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="2-磁盘分区和挂载"><a href="#2-磁盘分区和挂载" class="headerlink" title="2. 磁盘分区和挂载"></a>2. 磁盘分区和挂载</h1><h1 id="3-内网穿透"><a href="#3-内网穿透" class="headerlink" title="3. 内网穿透"></a>3. 内网穿透</h1><h1 id="3-搭建anaconda环境"><a href="#3-搭建anaconda环境" class="headerlink" title="3.搭建anaconda环境"></a>3.搭建anaconda环境</h1><h1 id="4-搭建tensotflow环境"><a href="#4-搭建tensotflow环境" class="headerlink" title="4.搭建tensotflow环境"></a>4.搭建tensotflow环境</h1><h1 id="5-搭建pytorch环境"><a href="#5-搭建pytorch环境" class="headerlink" title="5. 搭建pytorch环境"></a>5. 搭建pytorch环境</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Xcy.小相</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/article/19cd5c15.html">http://example.com/article/19cd5c15.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Xcy.小相</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">-linux</a></div><div class="post_share"><div class="social-share" data-image="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/article/824ac3d0.html"><img class="next-cover" src="/img/archivePageImg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java|在Java中使用Ajax</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xcy.小相</div><div class="author-info__description">远赴人间惊鸿宴，一睹人间盛世颜</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xcyxiaoxiang"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到xcy.小相的个人博客空间，在这里，享受时光，分享技术！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. 系统安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%88%B6%E4%BD%9C%E5%90%AF%E5%8A%A8%E7%9B%98"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 制作启动盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E9%85%8D%E7%BD%AEbios"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 配置bios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-bois%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 bois简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5BIOS"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 如何进入BIOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E5%85%B3%E9%97%AD%E5%AE%89%E5%85%A8%E5%BC%95%E5%AF%BC%EF%BC%88secure-boot%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 关闭安全引导（secure boot）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E4%BD%BF%E7%94%A8%E5%90%AF%E5%8A%A8%E7%9B%98%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 使用启动盘安装系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%AE%89%E8%A3%85%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 安装网卡驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 更换国内源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A4%87%E4%BB%BD"><span class="toc-number">1.5.1.</span> <span class="toc-text">1. 备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9"><span class="toc-number">1.5.2.</span> <span class="toc-text">2.修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9B%B4%E6%96%B0"><span class="toc-number">1.5.3.</span> <span class="toc-text">3. 更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%8C%82%E8%BD%BD"><span class="toc-number">2.</span> <span class="toc-text">2. 磁盘分区和挂载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-number">3.</span> <span class="toc-text">3. 内网穿透</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%90%AD%E5%BB%BAanaconda%E7%8E%AF%E5%A2%83"><span class="toc-number">4.</span> <span class="toc-text">3.搭建anaconda环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%90%AD%E5%BB%BAtensotflow%E7%8E%AF%E5%A2%83"><span class="toc-number">5.</span> <span class="toc-text">4.搭建tensotflow环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E6%90%AD%E5%BB%BApytorch%E7%8E%AF%E5%A2%83"><span class="toc-number">6.</span> <span class="toc-text">5. 搭建pytorch环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text"></span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/19cd5c15.html" title="Linux|记一次裸机安装Ubuntu的过程.md"><img src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux|记一次裸机安装Ubuntu的过程.md"/></a><div class="content"><a class="title" href="/article/19cd5c15.html" title="Linux|记一次裸机安装Ubuntu的过程.md">Linux|记一次裸机安装Ubuntu的过程.md</a><time datetime="2022-04-28T16:00:00.000Z" title="发表于 2022-04-29 00:00:00">2022-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/824ac3d0.html" title="Java|在Java中使用Ajax"><img src="/img/archivePageImg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java|在Java中使用Ajax"/></a><div class="content"><a class="title" href="/article/824ac3d0.html" title="Java|在Java中使用Ajax">Java|在Java中使用Ajax</a><time datetime="2022-03-03T16:00:00.000Z" title="发表于 2022-03-04 00:00:00">2022-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Xcy.小相</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">越努力越幸运</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
