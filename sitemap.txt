@@ -1,0 +1,8 @@
+http://example.com/tags/index.html
+http://example.com/categories/index.html
+http://example.com/about/index.html
+http://example.com/article/824ac3d0.html
+http://example.com/
+http://example.com/tags/ajax/
+http://example.com/categories/Java/
+http://example.com/categories/Java/Ajax/
