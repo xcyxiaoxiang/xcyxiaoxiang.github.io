@@ -1,0 +1,473 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python|数据分析三剑客之Pandas.md | Xcy.小相</title><meta name="keywords" content="python,数据分析,Pandas"><meta name="author" content="Xcy.小相"><meta name="copyright" content="Xcy.小相"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="pandas是提供高性能易用数据类型和数据分析工具的**第三方库**。简单讲，pandas主要作用有两个：提供了简易高效的数据类型、提供了数据分析的工具。pandas基于numpy，常和numpy、matplotlib一起使用……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python|数据分析三剑客之Pandas.md">
+<meta property="og:url" content="http://example.com/article/387e4c14.html">
+<meta property="og:site_name" content="Xcy.小相">
+<meta property="og:description" content="pandas是提供高性能易用数据类型和数据分析工具的**第三方库**。简单讲，pandas主要作用有两个：提供了简易高效的数据类型、提供了数据分析的工具。pandas基于numpy，常和numpy、matplotlib一起使用……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/Python|%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-06T03:51:05.562Z">
+<meta property="article:author" content="Xcy.小相">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/Python|%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://example.com/article/387e4c14"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":800,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: Xcy.小相","link":"链接: ","source":"来源: Xcy.小相","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python|数据分析三剑客之Pandas.md',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-06 11:51:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Xcy.小相" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光机</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于小相</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xcy.小相</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光机</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于小相</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python|数据分析三剑客之Pandas.md</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="1970-01-01T00:00:00.000Z" title="发表于 1970-01-01 08:00:00">1970-01-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-06T03:51:05.562Z" title="更新于 2022-05-06 11:51:05">2022-05-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>31分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python|数据分析三剑客之Pandas.md"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>写在前面的话： 开始之前请确保已经配置好python环境，并安装好第三方库pandas和numpy。</p>
+</blockquote>
+<h2 id="1-pandas库介绍"><a href="#1-pandas库介绍" class="headerlink" title="1. pandas库介绍"></a>1. pandas库介绍</h2><p>什么是pandas？pandas是提供高性能易用数据类型和数据分析工具的<strong>第三方库</strong>。简单讲，pandas主要作用有两个：提供了简易高效的数据类型、提供了数据分析的工具。pandas基于numpy，常和numpy、matplotlib一起使用。 关于数据类型，python中自带的数据类型远远不能满足于数据分析。可以说在数据分析中numpy中的数据类型是基础数据类型，关注的是数据的结构表达，体现在数据间的关系（维度）；pandas中的数据类型是基于numpy的扩展数据类型，关注的是数据的应用表达，体现在数据与索引之间的关系上。我们再学习pandas时最重要的是<strong>理解如何去操作索引</strong>，从某种程度上来说，操作索引就是操作数据。</p>
+<h2 id="2-pandas库的series类型"><a href="#2-pandas库的series类型" class="headerlink" title="2. pandas库的series类型"></a>2. pandas库的series类型</h2><p>pandas主要有两种数据类型，一维度的<code>Series</code>数据类型，二维及高维的<code>DataFrame</code>类型。我们先来看一下第一种，series类型。</p>
+<h4 id="2-1-什么是series类型？"><a href="#2-1-什么是series类型？" class="headerlink" title="2.1 什么是series类型？"></a>2.1 什么是series类型？</h4><p>series类型由一组数据及与之相关的数据索引组成。我们来看几行代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">    </span><br><span class="line">     a = pd.Series([7,8,9,10])</span><br><span class="line">     print(a)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     0     7</span><br><span class="line">     1     8</span><br><span class="line">     2     9</span><br><span class="line">     3    10</span><br><span class="line">     dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>观察输出代码，我们可以发现Series对象一共由3部分组成：左侧<strong>自动索引部分</strong>，右侧<strong>数据部分</strong>，底部<strong>数据类型</strong>（numpy中的数据类型）部分。</p>
+<p>除了自动添加索引外，我们还可以对其索引进行自定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     </span><br><span class="line">     a =pd.Series([7,8,9,10],index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;])  # index指定索引</span><br><span class="line">     print(a)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     a     7</span><br><span class="line">     b     8</span><br><span class="line">     c     9</span><br><span class="line">     d    10</span><br><span class="line">     dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>可见，索引部分变为了我们自定义的<code>abcd</code>。</p>
+<h4 id="2-2-如何创建series类型？"><a href="#2-2-如何创建series类型？" class="headerlink" title="2.2 如何创建series类型？"></a>2.2 如何创建series类型？</h4><p>创建Series类型的方法有很多种，主要以 以下几种为主：</p>
+<ol>
+<li>从<strong>标量</strong>创建</li>
+<li>从<strong>字典</strong>创建</li>
+<li>从<strong>ndarray</strong>类型创建</li>
+<li>从<strong>列表</strong>创建</li>
+</ol>
+<p><strong>下面进行具体讲解：</strong></p>
+<p>（1）从标量值创建</p>
+<p>即指定一个标量生成一个series类型，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     </span><br><span class="line">     a = pd.Series(5,index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;])</span><br><span class="line">     print(a)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> a    5</span><br><span class="line"> b    5</span><br><span class="line"> c    5</span><br><span class="line"> d    5</span><br><span class="line"> e    5</span><br><span class="line"> f    5</span><br><span class="line"> dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，此时的index参数不能省略（因为需要index来指定生成元素的个数和索引）。 （2）从字典类型创建 传入一个参数字典，字典的键为series类型的索引，字典的值为series类型的值：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> </span><br><span class="line"> my_dir=&#123;</span><br><span class="line">     &quot;a&quot;:1,</span><br><span class="line">     &quot;b&quot;:2,</span><br><span class="line">     &quot;c&quot;:3</span><br><span class="line"> &#125;</span><br><span class="line"> b = pd.Series(my_dir)</span><br><span class="line"> print(b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> a    1</span><br><span class="line"> b    2</span><br><span class="line"> c    3</span><br><span class="line"> dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>此外，利用字典构造series类型时，我们同样可以使用index来指定其索引或改变其结构，这个索引会覆盖字典中的“键索引”。</p>
+<p>（3）从ndarray类型创建 ndarray类型是numpy中的数据类型，我们可以直接传入ndarray类型进行创建：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     c = np.arange(4)</span><br><span class="line">     d = pd.Series(c)</span><br><span class="line">     print(d)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     0    0</span><br><span class="line">     1    1</span><br><span class="line">     2    2</span><br><span class="line">     3    3</span><br><span class="line">     dtype: int32</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>同样，也可以使用index参数自定义索引。</p>
+<p>（4）也可以从python列表创建，见2.1中的小例。</p>
+<h4 id="2-3-series类型的基本使用"><a href="#2-3-series类型的基本使用" class="headerlink" title="2.3 series类型的基本使用"></a>2.3 series类型的基本使用</h4><p>Series对象包括index和values两部分，所以主要是这两部分操作。我们先看一下下面的案例：</p>
+<ul>
+<li>a.index:获取索引</li>
+<li>a.values: 获取数据</li>
+<li>a[‘a’]: 获取索引为a的元素</li>
+<li>a[0]：获取索引为0的元素，注意！自动索引和自定义索引并存但不能混合使用</li>
+</ul>
+<p>因为series是基于ndarray类型的，所以对Series的操作类似于ndarray类型的操作：</p>
+<ul>
+<li>numpy中运算和操作可用于series类型</li>
+<li>可以通过自动索引或自定义索引对其进行切片</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">      </span><br><span class="line">     a = pd.Series([1,2,3,4,5,6],index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;])</span><br><span class="line">     </span><br><span class="line">     print(&quot;a的值：&quot;,a.values)</span><br><span class="line">     print(&quot;a的索引：&quot;,a.index)</span><br><span class="line">     print(&quot;a[0]：&quot;,a[0])</span><br><span class="line">     print(&quot;a[&#x27;a&#x27;]:&quot;,a[&quot;a&quot;])</span><br><span class="line">     print(&quot;a切片：\n&quot;,a[::-1])</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     a的值： [1 2 3 4 5 6]</span><br><span class="line">     a的索引： Index([&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;], dtype=&#x27;object&#x27;)</span><br><span class="line">     a[0]： 1</span><br><span class="line">     a[&#x27;a&#x27;]: 1</span><br><span class="line">     a切片：</span><br><span class="line">      f    6</span><br><span class="line">     e    5</span><br><span class="line">     d    4</span><br><span class="line">     c    3</span><br><span class="line">     b    2</span><br><span class="line">     a    1</span><br><span class="line">     dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>此外，series类型具备<strong>对齐</strong>操作。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">     a = pd.Series([1,2,3],index=[&quot;c&quot;,&quot;d&quot;,&quot;e&quot;])</span><br><span class="line">     b = pd.Series([4,5,6,7,8],index=[&quot;a&quot;,&quot;b&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;])</span><br><span class="line">     c = a+b</span><br><span class="line">     print(c)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     a    NaN</span><br><span class="line">     b     NaN</span><br><span class="line">     c    NaN</span><br><span class="line">     d     NaN</span><br><span class="line">     e     9.0</span><br><span class="line">     f     NaN</span><br><span class="line">     g     NaN</span><br><span class="line">     dtype: float64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>我们让两个series类型相加。观察输出结果可以发现，只有当a、b两者中有相同索引（包括位置）时，他们才会相加，而其余值则不会相加。这就对是series的对齐操作。这也同时验证了pandas是基于索引的运算。</p>
+<p>Series类型还有一个name属性，即series对象和索引都可以被赋予一个名称。我们可以使用.name来获取或定义其名称。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas  as pd</span><br><span class="line"> </span><br><span class="line">  a = pd.Series([1,2,3],index=[&quot;c&quot;,&quot;d&quot;,&quot;e&quot;])</span><br><span class="line">  </span><br><span class="line"> print(a.name)   # 初始是没有名称的</span><br><span class="line"> a.name = &quot;mySeries&quot;</span><br><span class="line"> print(a.name)</span><br><span class="line">   </span><br><span class="line"> print(a.index.name)</span><br><span class="line"> a.index.name = &quot;索引列&quot;</span><br><span class="line"> print(a.index.name)</span><br><span class="line"> print(&quot;*&quot;*20)</span><br><span class="line"> print(a)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  None</span><br><span class="line"> mySeries</span><br><span class="line"> None</span><br><span class="line"> 索引列</span><br><span class="line"> ********************</span><br><span class="line"> 索引列</span><br><span class="line"> c    1</span><br><span class="line"> d    2</span><br><span class="line"> e    3</span><br><span class="line"> Name: mySeries, dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-pandas库的DataFrame类型"><a href="#3-pandas库的DataFrame类型" class="headerlink" title="3. pandas库的DataFrame类型"></a>3. pandas库的DataFrame类型</h2><p>介绍完Series类型，再然我们来看一下二维及多维的DataFrame类型。</p>
+<h4 id="3-1-什么是DataFrame类型？"><a href="#3-1-什么是DataFrame类型？" class="headerlink" title="3.1 什么是DataFrame类型？"></a>3.1 什么是DataFrame类型？</h4><p>DataFrame类型是由共用相同索引的一组列数据组成的数据类型。即DataFrame类型是一个类似于表格型的数据类型，每列值类型可以不同，同一行的多列数据都共用同一个索引。我们先看一个小例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     a = np.arange(10).reshape(2,5)</span><br><span class="line">     b = pd.DataFrame(a)</span><br><span class="line">     print(b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>通过numpy生成一个二维的ndarray数组，并将其作为参数传给DataFrame，从而生成DataFrame类型的数据。输出如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/2d2d8be078cf48038a8db2e63336f92c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"></p>
+<p>从输出结果中，可以发现，输出结果一共由三部分组成：左侧(纵向)<strong>行索引index(红色区,为轴axis&#x3D;0)</strong> 、顶部(横向)<strong>列索引column(黄色区，为轴axis&#x3D;1)</strong> 以及数据部分(蓝色区)。 DataFrame常用于表达二维数据，但也可以表达多维数据。</p>
+<h4 id="3-2-如何创建DataFrame类型？"><a href="#3-2-如何创建DataFrame类型？" class="headerlink" title="3.2 如何创建DataFrame类型？"></a>3.2 如何创建DataFrame类型？</h4><p>dataFrame可以由以下4种方法创建：</p>
+<ol>
+<li>二维ndarray对象</li>
+<li>字典</li>
+<li>Series类型</li>
+<li>其它DataFrame类型</li>
+</ol>
+<p>接下来，我们进行详细介绍：</p>
+<p>（1）由二维ndarray对象创建</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     a = np.arange(16).reshape(4,4)</span><br><span class="line">     print(&#x27;ndarray类型:\n&#x27;,a)</span><br><span class="line">     b = pd.DataFrame(a)</span><br><span class="line">     print(&#x27;转换后的DataFrame类型：\n&#x27;,b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>通过numpy生成一个4*4的ndarray类型，然后作为参数转换成DataFrame类型，输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     ndarray类型:</span><br><span class="line">      [[ 0  1  2  3]</span><br><span class="line">      [ 4  5  6  7]</span><br><span class="line">      [ 8  9 10 11]</span><br><span class="line">      [12 13 14 15]]</span><br><span class="line">     转换后的DataFrame类型：</span><br><span class="line">          0   1   2   3</span><br><span class="line">     0   0   1   2   3</span><br><span class="line">     1   4   5   6   7</span><br><span class="line">     2   8   9  10  11</span><br><span class="line">     3  12  13  14  15</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>（2）由多个一维Series组成的字典生成 我们首先创建一个字典，并将其作为采参数传给DataFrame：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> a = &#123;</span><br><span class="line">     &quot;小明&quot;:pd.Series([100,99,98,100,95,99],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小红&quot;:pd.Series([100,99,98,100,95,99],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小蓝&quot;:pd.Series([100,99,98,100,95,99],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小黄&quot;:pd.Series([100,99,98,100,95,99],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小绿&quot;:pd.Series([100,99,98,100,95,99],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;])&#125;</span><br><span class="line"> b = pd.DataFrame(a)</span><br><span class="line"> print(b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      小明   小红   小蓝   小黄   小绿</span><br><span class="line"> 语文  100    100   100   100   100</span><br><span class="line"> 数学   99     99    99    99    99</span><br><span class="line"> 英语   98     98    98    98    98</span><br><span class="line"> 物理  100    100   100   100   100</span><br><span class="line"> 化学   95     95    95    95    95</span><br><span class="line"> 生物   99     99    99    99    99</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，键名变成了列标签，键值索引变成了行标签。</p>
+<h4 id="3-3-DataFrame与Series的关系"><a href="#3-3-DataFrame与Series的关系" class="headerlink" title="3.3 DataFrame与Series的关系"></a>3.3 DataFrame与Series的关系</h4><p>可以发现当我们从DataFrame中取出一行或一列时，所得结果是Series类型。也就是说<strong>DataFrame是Series类型的容器。</strong></p>
+<h2 id="4-pandas库的数据操作"><a href="#4-pandas库的数据操作" class="headerlink" title="4. pandas库的数据操作"></a>4. pandas库的数据操作</h2><p>在上文中，我们提到pandas的两种数据类型是series类型和DataFrame类型。接下来，我们主要针对这两种数据类型的操作进行讲解。</p>
+<h4 id="4-1-Dataframe的基本属性"><a href="#4-1-Dataframe的基本属性" class="headerlink" title="4.1 Dataframe的基本属性"></a>4.1 Dataframe的基本属性</h4><ul>
+<li><p>df.shape：行数和列数</p>
+</li>
+<li><p>df.dtype：列数据类型</p>
+</li>
+<li><p>df.ndim：数据维度</p>
+</li>
+<li><p>df.index：行索引</p>
+</li>
+<li><p>df.columns：列索引</p>
+</li>
+<li><p>df.values：值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> df = pd.DataFrame(np.arange(16).reshape(4,4),index=list(&quot;abcd&quot;),columns=list(&quot;ABCD&quot;))</span><br><span class="line"> print(df)</span><br><span class="line"> </span><br><span class="line"> print(&quot;行数和列数：&quot;,df.shape)</span><br><span class="line"> print(&quot;列数据类型：\n&quot;,df.dtypes)</span><br><span class="line"> print(&quot;数据维度：&quot;,df.ndim)</span><br><span class="line"> print(&quot;行索引：&quot;,df.index,&quot;数据类型：&quot;,type(df.index))</span><br><span class="line"> print(&quot;列索引：&quot;,df.columns,&quot;数据类型：&quot;,type(df.columns))</span><br><span class="line"> print(&quot;对象值：\n&quot;,df.values,&quot;数据类型：&quot;,type(df.values))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line">     A   B   C   D</span><br><span class="line"> </span><br><span class="line"> a   0   1   2   3</span><br><span class="line"> b   4   5   6   7</span><br><span class="line"> c   8   9  10  11</span><br><span class="line"> d  12  13  14  15</span><br><span class="line"> </span><br><span class="line"> 行数和列数： (4, 4)</span><br><span class="line"> </span><br><span class="line"> 列数据类型：</span><br><span class="line">  A    int32</span><br><span class="line"> B    int32</span><br><span class="line"> C    int32</span><br><span class="line"> D    int32</span><br><span class="line"> dtype: object</span><br><span class="line"> </span><br><span class="line"> 数据维度： 2</span><br><span class="line"> </span><br><span class="line"> 行索引： Index([&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;], dtype=&#x27;object&#x27;) 数据类型： &lt;class &#x27;pandas.core.indexes.base.Index&#x27;&gt;</span><br><span class="line"> 列索引： Index([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;], dtype=&#x27;object&#x27;) 数据类型： &lt;class &#x27;pandas.core.indexes.base.Index&#x27;&gt;</span><br><span class="line"> </span><br><span class="line"> 对象值：</span><br><span class="line">  [[ 0  1  2  3]</span><br><span class="line">  [ 4  5  6  7]</span><br><span class="line">  [ 8  9 10 11]</span><br><span class="line">  [12 13 14 15]] 数据类型： &lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-dataFrame整体情况查询"><a href="#4-2-dataFrame整体情况查询" class="headerlink" title="4.2 dataFrame整体情况查询"></a>4.2 dataFrame整体情况查询</h4><ul>
+<li><p>df.head(n): 显示前n行，默认前五行</p>
+</li>
+<li><p>df.tail(n)：显示末尾n行，默认后五行</p>
+</li>
+<li><p>df.info()：基本信息：行列数，列索引，列非空值个数，列类型行类型，内存占用等</p>
+</li>
+<li><p>df.describe()： 统计信息：行数，列数，均值，标准差，最大值，最小值，四分位数等</p>
+</li>
+<li><p>df.sort_values(by&#x3D;”列标签”，ascending&#x3D;True)：升序排序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> df = pd.DataFrame(np.arange(16).reshape(4,4),index=list(&quot;abcd&quot;),columns=list(&quot;ABCD&quot;))</span><br><span class="line"> print(df)</span><br><span class="line"> </span><br><span class="line"> print(&quot;前3行：\n&quot;,df.head(3))</span><br><span class="line"> print(&quot;-&quot;*50)</span><br><span class="line"> print(&quot;后3行：\n&quot;,df.tail(3))</span><br><span class="line"> print(&quot;-&quot;*50)</span><br><span class="line"> print(&quot;基本信息:&quot;)</span><br><span class="line"> print(df.info())</span><br><span class="line"> print(&quot;-&quot;*50)</span><br><span class="line"> print(&quot;统计信息：&quot;,df.describe())</span><br><span class="line"> print(&quot;降序排序：&quot;)</span><br><span class="line"> print(df.sort_values(by=&quot;B&quot;, ascending=False))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line">      A   B   C   D</span><br><span class="line"> </span><br><span class="line"> a   0   1   2   3</span><br><span class="line"> b   4   5   6   7</span><br><span class="line"> c   8   9  10  11</span><br><span class="line"> d  12  13  14  15</span><br><span class="line"> </span><br><span class="line"> 前3行：</span><br><span class="line">     A  B   C   D</span><br><span class="line"> a  0  1   2   3</span><br><span class="line"> b  4  5   6   7</span><br><span class="line"> c  8  9  10  11</span><br><span class="line"> --------------------------------------------------</span><br><span class="line"> </span><br><span class="line"> 后3行：</span><br><span class="line">      A   B   C   D</span><br><span class="line"> b   4   5   6   7</span><br><span class="line"> c   8   9  10  11</span><br><span class="line"> d  12  13  14  15</span><br><span class="line"> --------------------------------------------------</span><br><span class="line"> </span><br><span class="line"> 基本信息:</span><br><span class="line"> &lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;  # 数据类型</span><br><span class="line"> Index: 4 entries, a to d               # 行数 4行</span><br><span class="line"> Data columns (total 4 columns):        # 列数 4列</span><br><span class="line"> </span><br><span class="line">  #   Column  Non-Null Count  Dtype</span><br><span class="line"> ---  ------  --------------  -----    # 列标签 列非空值个数  列数据类型</span><br><span class="line">  0   A       4 non-null      int32</span><br><span class="line">  1   B       4 non-null      int32</span><br><span class="line">  2   C       4 non-null      int32</span><br><span class="line">  3   D       4 non-null      int32</span><br><span class="line"> dtypes: int32(4)</span><br><span class="line"> memory usage: 96.0+ bytes            # 内存占用大小</span><br><span class="line"> </span><br><span class="line"> None</span><br><span class="line"> --------------------------------------------------</span><br><span class="line"> </span><br><span class="line"> 统计信息：  # 以下结果也为DataFrame类型</span><br><span class="line">         A          B          C          D</span><br><span class="line"> count   4.000000   4.000000   4.000000   4.000000  #包含的行数</span><br><span class="line"> mean    6.000000   7.000000   8.000000   9.000000  # 均值</span><br><span class="line"> std     5.163978   5.163978   5.163978   5.163978  # 标准差 </span><br><span class="line"> min     0.000000   1.000000   2.000000   3.000000  # 最小值</span><br><span class="line"> 25%     3.000000   4.000000   5.000000   6.000000  # 前25%中位数</span><br><span class="line"> 50%     6.000000   7.000000   8.000000   9.000000  # 中位数</span><br><span class="line"> 75%     9.000000  10.000000  11.000000  12.000000  # 前75%中位数</span><br><span class="line"> max    12.000000  13.000000  14.000000  15.000000  # 最大值</span><br><span class="line"> </span><br><span class="line"> 降序排序：</span><br><span class="line">     A   B   C   D</span><br><span class="line"> d  12  13  14  15</span><br><span class="line"> c   8   9  10  11</span><br><span class="line"> b   4   5   6   7</span><br><span class="line"> a   0   1   2   3</span><br><span class="line"> </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-取值操作"><a href="#4-3-取值操作" class="headerlink" title="4.3 取值操作"></a>4.3 取值操作</h4><p>取值操作是pandas中的一个基本操作，我们先生成一个100行3列的数据，用于下面操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> df = pd.DataFrame(np.arange(16).reshape(4,4),index=list(&quot;abcd&quot;),columns=list(&quot;ABCD&quot;))</span><br><span class="line"> print(df)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     A   B   C   D</span><br><span class="line"> </span><br><span class="line"> a   0   1   2   3</span><br><span class="line"> b   4   5   6   7</span><br><span class="line"> c   8   9  10  11</span><br><span class="line"> d  12  13  14  15</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>pandas中有较多的取值方法，但是最常用最好用的方法是以下两种，这里也将详细介绍这两种方法：</p>
+<ul>
+<li><p>df.loc[]: 通过<strong>标签索引</strong>获取行数据</p>
+</li>
+<li><p>df.iloc[]: 通过<strong>位置</strong>获取行数据</p>
+<p>（1）先来看一下 df.loc[]:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> print(&quot;取a行A列的数据：&quot;,df.loc[&quot;a&quot;,&quot;A&quot;],&quot;数据类型：&quot;,type(df.loc[&quot;a&quot;,&quot;A&quot;]))</span><br><span class="line"> print(&quot;取A B列的数据：\n&quot;,df.loc[:,[&quot;A&quot;,&quot;B&quot;]],&quot;数据类型：&quot;,type(df.loc[:,[&quot;A&quot;,&quot;B&quot;]]))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 取a行A列的数据： 0 数据类型： &lt;class &#x27;numpy.int32&#x27;&gt;</span><br><span class="line"> 取A B列的数据：</span><br><span class="line">      A   B</span><br><span class="line"> a   0   1</span><br><span class="line"> b   4   5</span><br><span class="line"> c   8   9</span><br><span class="line"> d  12  13 数据类型： &lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>loc[]可以<strong>通过自定义的索引</strong>进行查找也可以通过位置索引进行查找。值得注意的是，这里我们用到了 [ : ]，这里是<strong>前闭后闭</strong>的，即会选择冒号后面的数据。</p>
+<p>（2）接着 来看一下df.iloc[]:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> print(&quot;取前两行前两列：\n&quot;,df.iloc[:2,:2])</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 取前两行前两列：</span><br><span class="line">    A  B</span><br><span class="line"> a  0  1</span><br><span class="line"> b  4  5</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>（3）布尔索引</p>
+<p>我们通过通常范围筛选数值，或通过判断进行筛选数值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> print(&quot;选取df中数值大于7小于13的行：\n&quot;,(df.loc[(df[&quot;B&quot;]&gt;7)&amp;(df[&quot;B&quot;]&lt;13)]))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 选取df中数值大于7小于13的行：</span><br><span class="line">    A  B   C   D</span><br><span class="line"> c  8  9  10  11</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>这里选取多个条件时，需要用（）括起来。</p>
+<h4 id="4-4-改变数据类型"><a href="#4-4-改变数据类型" class="headerlink" title="4.4 改变数据类型"></a>4.4 改变数据类型</h4><p>这里所谓的改变数据类型的结构就是对数据类型进行索引重排或增删 。主要操作如下：</p>
+<p>（1） .reindex(index&#x2F;columns):重排数据，通过改变数据的索引来对数据进行重新排序。 我们依旧拿上述的成绩单作为例子来进行讲解：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> a = &#123;</span><br><span class="line">     &quot;小明&quot;:pd.Series([100,99,91,90,85,69],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小红&quot;:pd.Series([100,93,92,100,65,93],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小蓝&quot;:pd.Series([100,94,93,70,55,92],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小黄&quot;:pd.Series([100,95,88,80,85,89],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;]),</span><br><span class="line">     &quot;小绿&quot;:pd.Series([100,92,78,89,75,79],index=[&quot;语文&quot;,&quot;数学&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;])&#125;</span><br><span class="line"> b = pd.DataFrame(a)</span><br><span class="line"> print(b)</span><br><span class="line"> </span><br><span class="line"> c = b.reindex(columns=[&quot;小红&quot;,&quot;小明&quot;,&quot;小蓝&quot;,&quot;小黄&quot;,&quot;小绿&quot;])</span><br><span class="line"> print(&quot;对换小明和小红：\n&quot;,c)</span><br><span class="line"> </span><br><span class="line"> d = b.reindex(index=[&quot;数学&quot;,&quot;语文&quot;,&quot;英语&quot;,&quot;物理&quot;,&quot;化学&quot;,&quot;生物&quot;])</span><br><span class="line"> print(d)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输入如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      小明   小红   小蓝   小黄   小绿</span><br><span class="line"> 语文  100   100   100   100   100</span><br><span class="line"> 数学   99    93    94    95    92</span><br><span class="line"> 英语   91    92    93    88    78</span><br><span class="line"> 物理   90   100    70    80    89</span><br><span class="line"> 化学   85    65    55    85    75</span><br><span class="line"> 生物   69    93    92    89    79</span><br><span class="line"> 对换小明和小红：</span><br><span class="line">       小红   小明   小蓝   小黄   小绿</span><br><span class="line"> 语文  100    100    100   100   100</span><br><span class="line"> 数学   93    99     94    95    92</span><br><span class="line"> 英语   92    91     93    88    78</span><br><span class="line"> 物理  100    90     70    80    89</span><br><span class="line"> 化学   65    85     55    85    75</span><br><span class="line"> 生物   93    69     92    89    79</span><br><span class="line">  对换数学和语文：</span><br><span class="line">      小明   小红   小蓝   小黄   小绿</span><br><span class="line"> 数学   99     93     94   95    92</span><br><span class="line"> 语文  100    100    100   100   100</span><br><span class="line"> 英语   91     92     93    88    78</span><br><span class="line"> 物理   90    100     70    80    89</span><br><span class="line"> 化学   85     65     55    85    75</span><br><span class="line"> 生物   69     93     92    89    79</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>可见，通过columns调换了列数据，通过index调换了行数据。 下面补充一下.index()方法的其余参数：</p>
+<ul>
+<li>index,columns:新的行列自定义索引</li>
+<li>fill_value：重新索引中，用于填充缺失位置（NaN）的值</li>
+<li>limit： 最大填充量</li>
+<li>method：填充方法 ffill向前填充，bfill向后填充</li>
+<li>copy：默认True，生成新的对象</li>
+</ul>
+<p>(2)另外，对于缺失值还有另一种处理方法:</p>
+<ul>
+<li><p>pd.isnull(df): 是否为空值，空值标为True</p>
+</li>
+<li><p>pd.isnotnull(df)：是否为非空值，非空值标为True</p>
+</li>
+<li><p>df.dropna(axis&#x3D;0&#x2F;1,how&#x3D;”all&#x2F;any”,inplace&#x3D;True&#x2F;False)： 删除nan所在的行&#x2F;列</p>
+</li>
+<li><p>df.fiullan(n):将空值填充为n</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> df = pd.DataFrame(np.arange(16).reshape(4,4),columns=list(&quot;ABCD&quot;))</span><br><span class="line"> df.loc[3,&quot;C&quot;] = None</span><br><span class="line"> df.loc[2,&quot;C&quot;] = None</span><br><span class="line"> print(df)</span><br><span class="line"> </span><br><span class="line"> print(df.isnull())</span><br><span class="line"> print(df.notnull())</span><br><span class="line"> print(df.dropna(axis=0,inplace=False))</span><br><span class="line"> print(df.fillna(df.mean()))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>输出为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     A   B    C   D</span><br><span class="line"> </span><br><span class="line"> 0   0   1  2.0   3</span><br><span class="line"> 1   4   5  6.0   7</span><br><span class="line"> 2   8   9  NaN  11</span><br><span class="line"> 3  12  13  NaN  15</span><br><span class="line"> </span><br><span class="line">        A      B      C      D</span><br><span class="line"> 0  False  False  False  False</span><br><span class="line"> 1  False  False  False  False</span><br><span class="line"> 2  False  False   True  False</span><br><span class="line"> 3  False  False   True  False</span><br><span class="line"> </span><br><span class="line">       A     B      C     D</span><br><span class="line"> 0  True  True   True  True</span><br><span class="line"> 1  True  True   True  True</span><br><span class="line"> 2  True  True  False  True</span><br><span class="line"> 3  True  True  False  True</span><br><span class="line"> </span><br><span class="line">    A  B    C  D</span><br><span class="line"> 0  0  1  2.0  3</span><br><span class="line"> 1  4  5  6.0  7</span><br><span class="line"> </span><br><span class="line">     A   B    C   D</span><br><span class="line"> 0   0   1  2.0   3</span><br><span class="line"> 1   4   5  6.0   7</span><br><span class="line"> 2   8   9  4.0  11</span><br><span class="line"> 3  12  13  4.0  15</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-5-索引操作"><a href="#4-5-索引操作" class="headerlink" title="4.5 索引操作"></a>4.5 索引操作</h4><p>对于索引，也有下常用的方法：</p>
+<ul>
+<li>.append()连接另一个index对象，产生新的index对象</li>
+<li>.diff(idx):计算差集，产生新的index对象</li>
+<li>intersection(idx):计算交集</li>
+<li>union（idx）：吉计算并集</li>
+<li>delete(loc): 删除loc位置处的元素</li>
+<li>insert(loc,c):在loc位置增加一个元素c</li>
+</ul>
+<h4 id="4-6-删除指定索引对象"><a href="#4-6-删除指定索引对象" class="headerlink" title="4.6 删除指定索引对象"></a>4.6 删除指定索引对象</h4><p>.drop()可以删除series和DataFrame指定的行或列索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> </span><br><span class="line"> a = pd.Series([4,5,6,7],index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;])</span><br><span class="line"> print(a)</span><br><span class="line"> </span><br><span class="line"> b = a.drop([&quot;b&quot;,&quot;d&quot;])</span><br><span class="line"> print(b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> a    4</span><br><span class="line"> b    5</span><br><span class="line"> c    6</span><br><span class="line"> d    7</span><br><span class="line"> dtype: int64</span><br><span class="line"> a    4</span><br><span class="line"> c    6</span><br><span class="line"> dtype: int64</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>对于DataFrame对象，.drop()默认操作0轴上的对象，当我们要操作1轴上的对象时，需要添加参数指定是1轴：axis&#x3D;1。</p>
+<h2 id="5-pandas库的数据类型运算"><a href="#5-pandas库的数据类型运算" class="headerlink" title="5. pandas库的数据类型运算"></a>5. pandas库的数据类型运算</h2><h4 id="5-1-算数运算"><a href="#5-1-算数运算" class="headerlink" title="5.1 算数运算"></a>5.1 算数运算</h4><p>pandas的数据类型在进行算数运算时，根据行列索引，补齐后运算，即只有当索引相同时才进行运算，不同索引之间不进行运算而是补齐NaN。默认结果为浮点型。不同维度的数据类型之间的运算采用广播运算，即对应索引之间进行运算。 我们先来看一下相同维度的运算：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> a = np.arange(10).reshape(2,5)</span><br><span class="line"> b = np.arange(15).reshape(3,5)</span><br><span class="line"> a = pd.DataFrame(a)</span><br><span class="line"> b = pd.DataFrame(b)</span><br><span class="line"> print(a)</span><br><span class="line"> print(b)</span><br><span class="line"> print(a*b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    0  1  2  3  4</span><br><span class="line"> 0  0  1  2  3  4</span><br><span class="line"> 1  5  6  7  8  9</span><br><span class="line">     0   1   2   3   4</span><br><span class="line"> 0   0   1   2   3   4</span><br><span class="line"> 1   5   6   7   8   9</span><br><span class="line"> 2  10  11  12  13  14</span><br><span class="line">       0     1     2     3     4</span><br><span class="line"> 0   0.0   1.0   4.0   9.0  16.0</span><br><span class="line"> 1  25.0  36.0  49.0  64.0  81.0</span><br><span class="line"> 2   NaN   NaN   NaN   NaN   NaN</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>不同维度的运算如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> a = pd.Series([1,2,3,4,5])</span><br><span class="line"> b = np.arange(10).reshape(2,5)</span><br><span class="line"> b = pd.DataFrame(b)</span><br><span class="line"> </span><br><span class="line"> print(a)</span><br><span class="line"> print(b)</span><br><span class="line"> </span><br><span class="line"> print(&quot;________&quot;)</span><br><span class="line"> c = b-a</span><br><span class="line"> print(c)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>我们生成一个一维series对象a，一个二DataFrame对象b,然后用b-a，得到的结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 0    1</span><br><span class="line"> 1    2</span><br><span class="line"> 2    3</span><br><span class="line"> 3    4</span><br><span class="line"> 4    5</span><br><span class="line"> dtype: int64</span><br><span class="line">    0  1  2  3  4</span><br><span class="line"> 0  0  1  2  3  4</span><br><span class="line"> 1  5  6  7  8  9</span><br><span class="line"> ________</span><br><span class="line">    0  1  2  3  4</span><br><span class="line"> 0 -1 -1 -1 -1 -1</span><br><span class="line"> 1  4  4  4  4  4</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>观察结果可以发现，b中的1轴都减去了a，即b中的每一行都对应减去了a中的元素。所以，对于不同维度的数据类型运算来说，默认的是高纬度的对series进行1轴运算。</p>
+<h4 id="5-2-比较运算"><a href="#5-2-比较运算" class="headerlink" title="5.2 比较运算"></a>5.2 比较运算</h4><p>比较运算只能比较相同索引的元素，需要注意的是这里不进行补齐。二维和一维，一维和零维之间为广播运算，结果产生由布尔值组成的对象。</p>
+<p>相同纬度：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     a = np.arange(16).reshape(4,4)</span><br><span class="line">     a = pd.DataFrame(a)</span><br><span class="line">     </span><br><span class="line">     b = np.arange(4,20).reshape(4,4)</span><br><span class="line">     b = pd.DataFrame(b)</span><br><span class="line">     </span><br><span class="line">     print(a,&quot;\n&quot;)</span><br><span class="line">     print(b,&quot;\n&quot;)</span><br><span class="line">     </span><br><span class="line">     print(a == b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">         0   1   2   3</span><br><span class="line">     0   0   1   2   3</span><br><span class="line">     1   4   5   6   7</span><br><span class="line">     2   8   9  10  11</span><br><span class="line">     3  12  13  14  15 </span><br><span class="line">     </span><br><span class="line">         0   1   2   3</span><br><span class="line">     0   4   5   6   7</span><br><span class="line">     1   8   9  10  11</span><br><span class="line">     2  12  13  14  15</span><br><span class="line">     3  16  17  18  19 </span><br><span class="line">     </span><br><span class="line">            0      1      2      3</span><br><span class="line">     0  False  False  False  False</span><br><span class="line">     1  False  False  False  False</span><br><span class="line">     2  False  False  False  False</span><br><span class="line">     3  False  False  False  False</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>相同维度进行比较时，要求两个数据的尺寸必须相同，否则会报错。那么不同维度的相比较会是怎样的结果呢？让我们来看一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">     a = pd.Series([1,2,3,4])</span><br><span class="line">     </span><br><span class="line">     b = np.arange(1,17).reshape(4,4)</span><br><span class="line">     b = pd.DataFrame(b)</span><br><span class="line">     </span><br><span class="line">     print(a,&quot;\n&quot;)</span><br><span class="line">     print(b,&quot;\n&quot;)</span><br><span class="line">     </span><br><span class="line">     print(a==b)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     0    1</span><br><span class="line">     1    2</span><br><span class="line">     2    3</span><br><span class="line">     3    4</span><br><span class="line">     dtype: int64 </span><br><span class="line">     </span><br><span class="line">         0   1   2   3</span><br><span class="line">     0   1   2   3   4</span><br><span class="line">     1   5   6   7   8</span><br><span class="line">     2   9  10  11  12</span><br><span class="line">     3  13  14  15  16 </span><br><span class="line">     </span><br><span class="line">            0      1      2      3</span><br><span class="line">     0   True   True   True   True</span><br><span class="line">     1  False  False  False  False</span><br><span class="line">     2  False  False  False  False</span><br><span class="line">     3  False  False  False  False</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，不同维度相比较，进行广播运算，默认是1轴。 此外，除了直接利用运算符进行运算外，我们还可以利用函数进行运算。</p>
+<ul>
+<li>.add(d,**argws):加法</li>
+<li>.sub(d,**argws)：减法</li>
+<li>.mul(d,**argws)：乘法</li>
+<li>.div(d,**argws)：除法</li>
+</ul>
+<p>通过这些函数我们不仅可以进行基本运算，而且带有可选参数的它，为我们提供了更加强大的功能，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     import pandas as pd</span><br><span class="line">     import numpy as np</span><br><span class="line">     </span><br><span class="line">     a = np.arange(16).reshape(4,4)</span><br><span class="line">     a = pd.DataFrame(a)</span><br><span class="line">     </span><br><span class="line">     b = np.arange(20).reshape(5,4)</span><br><span class="line">     b = pd.DataFrame(b)</span><br><span class="line">     </span><br><span class="line">     print(a)</span><br><span class="line">     print(b)</span><br><span class="line">     </span><br><span class="line">     c = b.add(a,fill_value=100)</span><br><span class="line">     print(c)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">         0   1   2   3</span><br><span class="line">     0   0   1   2   3</span><br><span class="line">     1   4   5   6   7</span><br><span class="line">     2   8   9  10  11</span><br><span class="line">     3  12  13  14  15</span><br><span class="line">     </span><br><span class="line">         0   1   2   3</span><br><span class="line">     0   0   1   2   3</span><br><span class="line">     1   4   5   6   7</span><br><span class="line">     2   8   9  10  11</span><br><span class="line">     3  12  13  14  15</span><br><span class="line">     4  16  17  18  19</span><br><span class="line">            0      1      2      3</span><br><span class="line">     0    0.0    2.0    4.0    6.0</span><br><span class="line">     1    8.0   10.0   12.0   14.0</span><br><span class="line">     2   16.0   18.0   20.0   22.0</span><br><span class="line">     3   24.0   26.0   28.0   30.0</span><br><span class="line">     4  116.0  117.0  118.0  119.0</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，ab是相同维度，但是尺寸不同，按照上文中直接使用加法运算程序会报错。但是在这里，我们传入了一个参数，在进行先进行补齐操作，然后进行运算。</p>
+<h2 id="6-pandas操作CSV"><a href="#6-pandas操作CSV" class="headerlink" title="6. pandas操作CSV"></a>6. pandas操作CSV</h2><h3 id="6-1-pandas读取CSV文件"><a href="#6-1-pandas读取CSV文件" class="headerlink" title="6.1 pandas读取CSV文件"></a>6.1 pandas读取CSV文件</h3><p>我们先创建一个15行4列的a.csv文件，用于下列案例之用：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> import pandas as pd</span><br><span class="line"> import numpy as np</span><br><span class="line"> </span><br><span class="line"> # 创建一个csv文件</span><br><span class="line"> a = np.arange(60).reshape(15,4)</span><br><span class="line"> a = pd.DataFrame(a,columns=(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;))</span><br><span class="line"> print(a,&quot;\n&quot;)</span><br><span class="line"> a.to_csv(&quot;./a.csv&quot;,index=False)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>文件内容如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/93a6288088e64d0c88eb908bdddef821~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image-20220311111933216.png"></p>
+<p><strong>pd.read_csv()的常用参数如下：</strong></p>
+<ul>
+<li>filepath_or_buffer：**– str** 文件路径，可以是本地路径，也可以是url路径</li>
+<li>sep:指定分隔符，默认”,”</li>
+<li>header: <strong>–int</strong> 指定列名:header&#x3D;0为默认值，表示数据第一行为列名；header&#x3D;None表示数据没有列名(为0，1，2，3，4……)，原列名变为第0行数据。</li>
+</ul>
+<p>如案例1：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &quot;&quot;&quot;案例1：filepath_or_buffer、sep、header的使用 &quot;&quot;&quot;</span><br><span class="line"> def demo01():</span><br><span class="line">     print(&quot;=== header=0时（默认）表示数据第一行为列名===&quot;)</span><br><span class="line">     path = &quot;data.csv&quot;</span><br><span class="line">     df = pd.read_csv(path, sep=&quot;,&quot;, header=0)</span><br><span class="line">     print(df.head(), &quot;\n&quot;)  # 默认输出前5行</span><br><span class="line"> </span><br><span class="line">     print(&quot;===header=none时 列名变为第0行数据===&quot;)</span><br><span class="line">     # header = None时</span><br><span class="line">     df = pd.read_csv(path, sep=&quot;,&quot;, header=None)</span><br><span class="line">     print(df.head(), &quot;\n&quot;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> === header=0时（默认）===</span><br><span class="line">     a   b   c   d</span><br><span class="line"> 0   0   1   2   3</span><br><span class="line"> 1   4   5   6   7</span><br><span class="line"> 2   8   9  10  11</span><br><span class="line"> 3  12  13  14  15</span><br><span class="line"> 4  16  17  18  19 </span><br><span class="line"> </span><br><span class="line"> ===header=none时 ===</span><br><span class="line">     0   1   2   3</span><br><span class="line"> 0   a   b   c   d</span><br><span class="line"> 1   0   1   2   3</span><br><span class="line"> 2   4   5   6   7</span><br><span class="line"> 3   8   9  10  11</span><br><span class="line"> 4  12  13  14  15 </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>names: <strong>–list</strong> 指定列名，当文件含有列名时会覆盖</li>
+</ul>
+<p>如案例2：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &quot;&quot;&quot;通过names参数重新指定列名&quot;&quot;&quot;</span><br><span class="line"> def demo02():</span><br><span class="line">     df = pd.read_csv(path, names=[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;])</span><br><span class="line">     print(&quot;重新指定列名:&quot;)</span><br><span class="line">     print(df.head(), &quot;\n&quot;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 重新指定列名:</span><br><span class="line">     A   B   C   D</span><br><span class="line"> 0   a   b   c   d</span><br><span class="line"> 1   0   1   2   3</span><br><span class="line"> 2   4   5   6   7</span><br><span class="line"> 3   8   9  10  11</span><br><span class="line"> 4  12  13  14  15 </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>encoding</strong>：指定编码格式，默认为utf-8。常用户解决乱码问题和平台编码不同的问题。</li>
+<li>index_col:<strong>–str&#x2F;list</strong> 指定索引,将表中的某一列数据指定为索引。可以是单列也可以是多列。</li>
+</ul>
+<p>如案例3：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &quot;&quot;&quot;通过index_col参数指定索引&quot;&quot;&quot;</span><br><span class="line"> def demo03():</span><br><span class="line">     print(&quot;指定b列为索引:&quot;)</span><br><span class="line">     df = pd.read_csv(path, index_col=&quot;b&quot;)</span><br><span class="line">     print(df.head(), &quot;\n&quot;)</span><br><span class="line">     df.to_csv(&quot;text.csv&quot;)</span><br><span class="line"> </span><br><span class="line">     print(&quot;指定ab两列为索引:&quot;)</span><br><span class="line">     df = pd.read_csv(path, index_col=[&quot;a&quot;, &quot;b&quot;])</span><br><span class="line">     print(df.head())</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 指定b列为索引:</span><br><span class="line">      a   c   d</span><br><span class="line"> b             </span><br><span class="line"> 1    0   2   3</span><br><span class="line"> 5    4   6   7</span><br><span class="line"> 9    8  10  11</span><br><span class="line"> 13  12  14  15</span><br><span class="line"> 17  16  18  19 </span><br><span class="line"> </span><br><span class="line"> 指定ab两列为索引:</span><br><span class="line">         c   d</span><br><span class="line"> a  b         </span><br><span class="line"> 0  1    2   3</span><br><span class="line"> 4  5    6   7</span><br><span class="line"> 8  9   10  11</span><br><span class="line"> 12 13  14  15</span><br><span class="line"> 16 17  18  19</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>usecols: <strong>–str&#x2F;list</strong> 指定读取的列,默认读取全部列</li>
+<li>nrows：**–int** 仅读取前多少行（不包括此行）</li>
+<li>skiprows：**–int** 跳过指定行数，开始读取（包括此行），注意必要时要指定列名，否则根据header&#x3D;0当前行会为列名</li>
+</ul>
+<p>如案例4：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &quot;&quot;&quot;usecols、nrows、skiprows的使用&quot;&quot;&quot;</span><br><span class="line"> def demo04():</span><br><span class="line">     print(&quot;只读取bc列:&quot;)</span><br><span class="line">     df = pd.read_csv(path, usecols=(&quot;b&quot;, &quot;c&quot;))</span><br><span class="line">     print(df.head(), &quot;\n&quot;)</span><br><span class="line"> </span><br><span class="line">     print(&quot;读取前6行:&quot;)</span><br><span class="line">     df = pd.read_csv(path, nrows=6)</span><br><span class="line">     print(df, &quot;\n&quot;)</span><br><span class="line"> </span><br><span class="line">     print(&quot;从第6行开始读取:&quot;)</span><br><span class="line">     df = pd.read_csv(path, skiprows=6, names=list(&quot;abcd&quot;))</span><br><span class="line">     print(df.head(), &quot;\n&quot;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 只读取bc列:</span><br><span class="line">     b   c</span><br><span class="line"> 0   1   2</span><br><span class="line"> 1   5   6</span><br><span class="line"> 2   9  10</span><br><span class="line"> 3  13  14</span><br><span class="line"> 4  17  18 </span><br><span class="line"> </span><br><span class="line"> 读取前6行:</span><br><span class="line">     a   b   c   d</span><br><span class="line"> 0   0   1   2   3</span><br><span class="line"> 1   4   5   6   7</span><br><span class="line"> 2   8   9  10  11</span><br><span class="line"> 3  12  13  14  15</span><br><span class="line"> 4  16  17  18  19</span><br><span class="line"> 5  20  21  22  23 </span><br><span class="line"> </span><br><span class="line"> 从第6行开始读取:</span><br><span class="line">     a   b   c   d</span><br><span class="line"> 0  20  21  22  23</span><br><span class="line"> 1  24  25  26  27</span><br><span class="line"> 2  28  29  30  31</span><br><span class="line"> 3  32  33  34  35</span><br><span class="line"> 4  36  37  38  39 </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-pandas保存CSV文件"><a href="#6-2-pandas保存CSV文件" class="headerlink" title="6.2 pandas保存CSV文件"></a>6.2 pandas保存CSV文件</h3><p>通过pandas保存csv实质上是调用<strong>DataFrame对象</strong>的to_csv方法。接下来我们就主要介绍一下<code>to_csv</code>方法的常用参数。</p>
+<ul>
+<li><code>path_or_buf</code>: 保存路径</li>
+<li><code>sep</code>：分隔符，默认为<code>,</code></li>
+<li><code>na_rep</code>：替换空格。将空格替换为指定的值</li>
+<li><code>float_format</code>： 格式化数值如保留两位小数<code>%.2f</code></li>
+<li><code>header</code>： 是否保留列名，默认保留。值为<code>0</code>则不保留。</li>
+<li><code>index</code>：是否保留索引（布尔值），默认保留。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Xcy.小相</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/article/387e4c14.html">http://example.com/article/387e4c14.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Xcy.小相</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a><a class="post-meta__tags" href="/tags/pandas/">pandas</a></div><div class="post_share"><div class="social-share" data-image="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/13f11e39.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python|数据分析三剑客之Numpy.md</div></div></a></div><div class="next-post pull-right"><a href="/article/d8747af8.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python|数据分析三剑客之Matplotlib.md</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/13f11e39.html" title="Python|数据分析三剑客之Numpy.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|数据分析三剑客之Numpy.md</div></div></a></div><div><a href="/article/d8747af8.html" title="Python|数据分析三剑客之Matplotlib.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BPandas/112bb9699325447ea641601ff9596d18~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|数据分析三剑客之Matplotlib.md</div></div></a></div><div><a href="/article/75bf383e.html" title="Python|通过plt.boxplot()绘制箱图.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E9%80%9A%E8%BF%87plt.boxplot()%E7%BB%98%E5%88%B6%E7%AE%B1%E5%9B%BE/20210122135648812.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|通过plt.boxplot()绘制箱图.md</div></div></a></div><div><a href="/article/965eaddc.html" title="Python|使用pyplot添加图例-坐标轴尺度.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7C%E4%BD%BF%E7%94%A8pyplot%E6%B7%BB%E5%8A%A0%E5%9B%BE%E4%BE%8B-%E5%9D%90%E6%A0%87%E8%BD%B4%E5%B0%BA%E5%BA%A6/image-20220506103558144.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|使用pyplot添加图例-坐标轴尺度.md</div></div></a></div><div><a href="/article/d4e5b415.html" title="Python|python内置排序函数.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7CPython%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8F/image-20220505225318787.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|python内置排序函数.md</div></div></a></div><div><a href="/article/452ead1d.html" title="Python|Python迭代器.md"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7CPython%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8F/image-20220505225318787.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 1970-01-01</div><div class="title">Python|Python迭代器.md</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xcy.小相</div><div class="author-info__description">远赴人间惊鸿宴，一睹人间盛世颜</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xcyxiaoxiang"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到xcy.小相的个人博客空间，在这里，享受时光，分享技术！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-pandas%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. pandas库介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-pandas%E5%BA%93%E7%9A%84series%E7%B1%BB%E5%9E%8B"><span class="toc-text">2. pandas库的series类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AFseries%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-text">2.1 什么是series类型？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BAseries%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-text">2.2 如何创建series类型？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-series%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">2.3 series类型的基本使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-pandas%E5%BA%93%E7%9A%84DataFrame%E7%B1%BB%E5%9E%8B"><span class="toc-text">3. pandas库的DataFrame类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AFDataFrame%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-text">3.1 什么是DataFrame类型？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BADataFrame%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-text">3.2 如何创建DataFrame类型？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-DataFrame%E4%B8%8ESeries%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">3.3 DataFrame与Series的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-pandas%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-text">4. pandas库的数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-Dataframe%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="toc-text">4.1 Dataframe的基本属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-dataFrame%E6%95%B4%E4%BD%93%E6%83%85%E5%86%B5%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.2 dataFrame整体情况查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E5%8F%96%E5%80%BC%E6%93%8D%E4%BD%9C"><span class="toc-text">4.3 取值操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.4 改变数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C"><span class="toc-text">4.5 索引操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E5%AF%B9%E8%B1%A1"><span class="toc-text">4.6 删除指定索引对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-pandas%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97"><span class="toc-text">5. pandas库的数据类型运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="toc-text">5.1 算数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="toc-text">5.2 比较运算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-pandas%E6%93%8D%E4%BD%9CCSV"><span class="toc-text">6. pandas操作CSV</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-pandas%E8%AF%BB%E5%8F%96CSV%E6%96%87%E4%BB%B6"><span class="toc-text">6.1 pandas读取CSV文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-pandas%E4%BF%9D%E5%AD%98CSV%E6%96%87%E4%BB%B6"><span class="toc-text">6.2 pandas保存CSV文件</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/19cd5c15.html" title="Linux|记一次裸机安装Ubuntu的过程.md"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%A3%B8%E6%9C%BA%E5%AE%89%E8%A3%85Ubuntu%E7%9A%84%E8%BF%87%E7%A8%8B/image-20220430213550615.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux|记一次裸机安装Ubuntu的过程.md"/></a><div class="content"><a class="title" href="/article/19cd5c15.html" title="Linux|记一次裸机安装Ubuntu的过程.md">Linux|记一次裸机安装Ubuntu的过程.md</a><time datetime="2022-04-28T16:00:00.000Z" title="发表于 2022-04-29 00:00:00">2022-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/824ac3d0.html" title="Java|在Java中使用Ajax"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/archivePageImg.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java|在Java中使用Ajax"/></a><div class="content"><a class="title" href="/article/824ac3d0.html" title="Java|在Java中使用Ajax">Java|在Java中使用Ajax</a><time datetime="2022-03-03T16:00:00.000Z" title="发表于 2022-03-04 00:00:00">2022-03-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/749ae3a4.html" title="MySQL|SQL数据定义.md"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Python%7CPython%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8F/image-20220505225318787.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL|SQL数据定义.md"/></a><div class="content"><a class="title" href="/article/749ae3a4.html" title="MySQL|SQL数据定义.md">MySQL|SQL数据定义.md</a><time datetime="1970-01-01T00:00:00.000Z" title="发表于 1970-01-01 08:00:00">1970-01-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/cd73afd4.html" title="开发手册|初始Git.md"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%7C%E5%88%9D%E5%A7%8BGit/image-20210817202849817.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开发手册|初始Git.md"/></a><div class="content"><a class="title" href="/article/cd73afd4.html" title="开发手册|初始Git.md">开发手册|初始Git.md</a><time datetime="1970-01-01T00:00:00.000Z" title="发表于 1970-01-01 08:00:00">1970-01-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/273687f6.html" title="Linux|一文搞懂java多线程.md"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Java%E5%A4%9A%E7%BA%BF%E7%A8%8BThread/v2-6886a471843d6982483ee682b724f31c_1440w.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux|一文搞懂java多线程.md"/></a><div class="content"><a class="title" href="/article/273687f6.html" title="Linux|一文搞懂java多线程.md">Linux|一文搞懂java多线程.md</a><time datetime="1970-01-01T00:00:00.000Z" title="发表于 1970-01-01 08:00:00">1970-01-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Xcy.小相</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">越努力越幸运</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
