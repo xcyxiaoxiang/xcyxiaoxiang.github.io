@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/article/452ead1d.html</loc>
+    <loc>http://example.com/article/cd73afd4.html</loc>
     
     <lastmod>2022-05-06</lastmod>
     
@@ -11,16 +11,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/article/13f11e39.html</loc>
-    
-    <lastmod>2022-05-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/article/387e4c14.html</loc>
+    <loc>http://example.com/article/ed11a8ed.html</loc>
     
     <lastmod>2022-05-06</lastmod>
     
@@ -47,7 +38,16 @@
   </url>
   
   <url>
-    <loc>http://example.com/article/48727427.html</loc>
+    <loc>http://example.com/article/387e4c14.html</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/article/13f11e39.html</loc>
     
     <lastmod>2022-05-06</lastmod>
     
@@ -65,6 +65,33 @@
   </url>
   
   <url>
+    <loc>http://example.com/article/965eaddc.html</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/article/48727427.html</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/article/452ead1d.html</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/article/d4e5b415.html</loc>
     
     <lastmod>2022-05-06</lastmod>
@@ -74,7 +101,16 @@
   </url>
   
   <url>
-    <loc>http://example.com/article/965eaddc.html</loc>
+    <loc>http://example.com/article/7647f2b.html</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/article/749ae3a4.html</loc>
     
     <lastmod>2022-05-06</lastmod>
     
@@ -93,42 +129,6 @@
   
   <url>
     <loc>http://example.com/article/ef947cb9.html</loc>
-    
-    <lastmod>2022-05-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/article/cd73afd4.html</loc>
-    
-    <lastmod>2022-05-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/article/749ae3a4.html</loc>
-    
-    <lastmod>2022-05-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/article/7647f2b.html</loc>
-    
-    <lastmod>2022-05-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/article/ed11a8ed.html</loc>
     
     <lastmod>2022-05-06</lastmod>
     
