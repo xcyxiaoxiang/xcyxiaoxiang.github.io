@@ -1,3 +1,4 @@
+http://example.com/article/273687f6.html
 http://example.com/article/cd73afd4.html
 http://example.com/article/ed11a8ed.html
 http://example.com/article/5ac4dcbc.html
@@ -13,7 +14,6 @@ http://example.com/article/7647f2b.html
 http://example.com/article/749ae3a4.html
 http://example.com/article/2ad3e4a9.html
 http://example.com/article/ef947cb9.html
-http://example.com/article/273687f6.html
 http://example.com/article/19cd5c15.html
 http://example.com/Gallery/university/index.html
 http://example.com/Gallery/Sunset/index.html
